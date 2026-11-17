@@ -1,0 +1,21 @@
+{
+  "name": "chess-assistant",
+  "productName": "ChessAssistant",
+  "version": "1.0.0",
+  "description": "Шахматный помощник: сканирует доску на экране и подсвечивает лучший ход",
+  "main": "main.js",
+  "type": "commonjs",
+  "private": true,
+  "scripts": {
+    "start": "electron .",
+    "test": "node test/vision.test.js",
+    "pack": "node tools/build.js"
+  },
+  "dependencies": {
+    "chess.js": "^1.4.0"
+  },
+  "devDependencies": {
+    "@electron/packager": "^18.3.6",
+    "electron": "^33.0.0"
+  }
+}

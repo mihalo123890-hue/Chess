@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'" />
+<title>Chess Assistant</title>
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+<div class="app">
+  <header>
+    <div class="logo">♞</div>
+    <div class="title">
+      <h1>Chess Assistant</h1>
+      <p>Сканер доски · Stockfish · оверлей</p>
+    </div>
+    <span id="pill" class="pill">—</span>
+  </header>
+
+  <section class="card">
+    <button id="scanBtn" class="primary">🎯 Выбрать поле <kbd>Shift</kbd>+<kbd>X</kbd></button>
+    <div class="row">
+      <button id="toggleBtn" class="secondary" disabled>▶ Старт</button>
+      <button id="quitBtn" class="ghost">Выход</button>
+    </div>
+    <ol class="how">
+      <li>Расставьте фигуры в начальную позицию и нажмите «Выбрать поле».</li>
+      <li><kbd>Shift</kbd>+<kbd>X</kbd> — первая точка, ведите мышь по диагонали, <kbd>Shift</kbd>+<kbd>X</kbd> — готово.</li>
+      <li>Программа запомнит клетки, вид фигур и ваш цвет (кто снизу), затем покажет ход зелёным.</li>
+    </ol>
+  </section>
+
+  <div id="error" class="alert error" hidden></div>
+
+  <section class="card">
+    <div class="status-row">
+      <div><span class="label">Статус</span><div id="message" class="msg">Выберите поле для начала</div></div>
+    </div>
+    <div class="facts">
+      <div><span class="label">Вы играете</span><b id="userColor">—</b></div>
+      <div><span class="label">Ход</span><b id="turn">—</b></div>
+      <div><span class="label">Оценка</span><b id="eval">—</b></div>
+    </div>
+
+    <div id="suggestion" class="suggestion" hidden>
+      <div class="move"><span id="mFrom">e2</span><span class="arrow">→</span><span id="mTo">e4</span></div>
+      <div class="san" id="san"></div>
+      <div class="reason" id="reason"></div>
+      <div class="line" id="pvline"></div>
+    </div>
+
+    <div class="board-wrap">
+      <div id="board" class="board"></div>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>Стратегия</h2>
+    <div class="strategies" id="strategies">
+      <button class="strat" data-s="alien">
+        <b>👽 Alien Gambit</b>
+        <span>Быстрый мат. Дебют 6.Nxf7! против Каро-Канн / Скандинавской, дальше — шахи, жертвы, охота на короля.</span>
+      </button>
+      <button class="strat" data-s="fast">
+        <b>⚡ Fast Win</b>
+        <span>Закончить партию как можно быстрее: агрессия, шахи, размены при перевесе, кратчайший мат.</span>
+      </button>
+      <button class="strat" data-s="defense">
+        <b>🛡 Strong Defense</b>
+        <span>Атака только при доказанном мате, иначе — безопасность короля и защита каждой фигуры.</span>
+      </button>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>Настройки</h2>
+    <label class="setting">
+      <span>Время на ход: <b id="thinkVal">1.5</b> с</span>
+      <input id="think" type="range" min="400" max="6000" step="100" value="1500" />
+    </label>
+    <label class="check"><input id="overlay" type="checkbox" checked /> Показывать оверлей на доске</label>
+    <label class="check"><input id="compat" type="checkbox" /> Режим совместимости (прятать оверлей на момент снимка)</label>
+  </section>
+
+  <footer>
+    Используйте для тренировки, анализа и игры против ботов. В рейтинговых партиях против людей подсказки движка запрещены правилами площадок.
+  </footer>
+</div>
+<script src="app.js"></script>
+</body>
+</html>
